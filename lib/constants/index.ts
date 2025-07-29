@@ -15,3 +15,11 @@ export const signUpDefaultValues = {
     password: '123456',
     confirmPassword: '123456',
 };
+
+export const shippingAddressDefaultValues = {
+    fullName: 'Mauricio Ramirez',
+    streetAddress: 'calle 12345',
+    city: 'Nuevo Cuscatlan',
+    postalCode: '503',
+    country: 'El Salvador',
+};
