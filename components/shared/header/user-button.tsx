@@ -33,7 +33,7 @@ const UserButton = async () => {
                     <div className='flex items-center'>
                         <Button
                             variant='ghost'
-                            className='relativee w-8 h-8 rounded-full ml-2 flex items-center justify-center bg-gray-200'
+                            className='w-8 h-8 rounded-full ml-2 flex items-center justify-center bg-gray-200'
                         >
                             {firstInitial}
                         </Button>
@@ -56,22 +56,26 @@ const UserButton = async () => {
                             User Profile
                         </Link>
                     </DropdownMenuItem>
+
                     <DropdownMenuItem>
                         <Link href='/user/orders' className='w-full'>
                             Order History
                         </Link>
                     </DropdownMenuItem>
 
-                    <DropdownMenuItem className='p-0 mb-1'>
-                        <form action={signOutUser} className='w-full'>
-                            <Button
-                                type="submit"
-                                className='w-full py-4 px-2 h-4 justify-start'
-                                variant='ghost'
-                            >
-                                Sign Out
-                            </Button>
-                        </form>
+                    <DropdownMenuItem
+                        className='p-0 mb-1'
+                        onClick={async () => {
+                            'use client';
+                            await signOutUser(); // client-side call
+                        }}
+                    >
+                        <Button
+                            className='w-full py-4 px-2 h-4 justify-start'
+                            variant='ghost'
+                        >
+                            Sign Out
+                        </Button>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
