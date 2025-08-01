@@ -1,9 +1,6 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { signOut } from 'next-auth/react';
-import { useSession } from 'next-auth/react';
+import { auth } from '@/auth';
+import { signOutUser } from '@/lib/actions/user.actions';
 import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
@@ -14,9 +11,8 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { UserIcon } from 'lucide-react';
 
-const UserButton = () => {
-    const { data: session } = useSession();
-    const router = useRouter();
+const UserButton = async () => {
+    const session = await auth();
 
     if (!session) {
         return (
@@ -27,7 +23,7 @@ const UserButton = () => {
             </Button>
         );
     }
-//
+
     const firstInitial = session.user?.name?.charAt(0).toUpperCase() ?? 'U';
 
     return (
@@ -37,7 +33,7 @@ const UserButton = () => {
                     <div className='flex items-center'>
                         <Button
                             variant='ghost'
-                            className='w-8 h-8 rounded-full ml-2 flex items-center justify-center bg-gray-200'
+                            className='relativee w-8 h-8 rounded-full ml-2 flex items-center justify-center bg-gray-200'
                         >
                             {firstInitial}
                         </Button>
@@ -60,27 +56,21 @@ const UserButton = () => {
                             User Profile
                         </Link>
                     </DropdownMenuItem>
-
                     <DropdownMenuItem>
                         <Link href='/user/orders' className='w-full'>
                             Order History
                         </Link>
                     </DropdownMenuItem>
 
-
-                    <DropdownMenuItem
-                        className='p-0 mb-1'
-                        onClick={async () => {
-                            await signOut();
-                            router.push('/');
-                        }}
-                    >
-                        <Button
-                            className='w-full py-4 px-2 h-4 justify-start'
-                            variant='ghost'
-                        >
-                            Sign Out
-                        </Button>
+                    <DropdownMenuItem className='p-0 mb-1'>
+                        <form action={signOutUser} className='w-full'>
+                            <Button
+                                className='w-full py-4 px-2 h-4 justify-start'
+                                variant='ghost'
+                            >
+                                Sign Out
+                            </Button>
+                        </form>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
