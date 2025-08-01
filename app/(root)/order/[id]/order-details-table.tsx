@@ -177,7 +177,12 @@ const OrderDetailsTable = ({ order, paypalclientId }: { order: Order, paypalclie
                                     <PayPalScriptProvider options={{ clientId: paypalclientId }}>
                                         <PrintLoadingState />
                                         <PayPalButtons
-                                            createOrder={handleCreatePayPalOrder}
+                                            createOrder={(_, actions) =>
+                                                handleCreatePayPalOrder().then((id) => {
+                                                    if (!id) throw new Error('No PayPal Order ID returned');
+                                                    return id;
+                                                })
+                                            }
                                             onApprove={handleApprovePayPalOrder}
                                         />
                                     </PayPalScriptProvider>
