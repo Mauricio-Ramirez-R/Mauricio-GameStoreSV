@@ -1,6 +1,9 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { auth } from '@/auth';
-import { signOutUser } from '@/lib/actions/user.actions';
+import { signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
@@ -11,8 +14,9 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { UserIcon } from 'lucide-react';
 
-const UserButton = async () => {
-    const session = await auth();
+const UserButton = () => {
+    const { data: session } = useSession();
+    const router = useRouter();
 
     if (!session) {
         return (
@@ -63,11 +67,12 @@ const UserButton = async () => {
                         </Link>
                     </DropdownMenuItem>
 
+
                     <DropdownMenuItem
                         className='p-0 mb-1'
                         onClick={async () => {
-                            'use client';
-                            await signOutUser(); // client-side call
+                            await signOut();
+                            router.push('/');
                         }}
                     >
                         <Button
