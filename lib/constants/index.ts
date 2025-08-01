@@ -10,18 +10,18 @@ export const signInDefaultValues = {
 };
 
 export const signUpDefaultValues = {
-    name: 'Mauricio Ramirez',
-    email: 'mauricio@example.com',
-    password: '123456',
-    confirmPassword: '123456',
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
 };
 
 export const shippingAddressDefaultValues = {
-    fullName: 'Mauricio Ramirez',
-    streetAddress: 'calle 12345',
-    city: 'Nuevo Cuscatlan',
-    postalCode: '503',
-    country: 'El Salvador',
+    fullName: '',
+    streetAddress: '',
+    city: '',
+    postalCode: '',
+    country: '',
 };
 
 export const PAYMENT_METHODS = process.env.PAYMENT_METHODS
