@@ -27,7 +27,7 @@ const UserButton = () => {
             </Button>
         );
     }
-
+//
     const firstInitial = session.user?.name?.charAt(0).toUpperCase() ?? 'U';
 
     return (
